@@ -21,10 +21,6 @@ Módulo Odoo que permite:
    - D. Reportes (PDF)
    - E. API pública y validación de endpoints
 6. Ejemplos de uso (curl / respuestas)
-7. Seguridad y permisos
-8. Troubleshooting (errores comunes y soluciones)
-9. Imágenes y documentación visual
-10. Tests funcionales recomendados
 
 ---
 
