@@ -91,21 +91,12 @@ Documentar el comportamiento funcional del módulo Hospital para que un analista
   - Acción para generar reporte PDF de los seleccionados.
   - Botones rápidos para cambiar estado (implementados en modelo).
 
-**Imagen — Lista (tree) pacientes**  
-![Lista pacientes - tree](docs/images/patient_tree.png)
-
-**Imagen — Form paciente**  
-![Formulario paciente](docs/images/patient_form.png)
 
 ### Tratamientos
 - **Tree**: lista de tratamientos con `name`.
 - **Form**: editar `name`, `description`.
 
-**Imagen — Lista tratamientos**  
-![Lista tratamientos - tree](docs/images/treatment_tree.png)
 
-**Imagen — Form tratamiento**  
-![Formulario tratamiento](docs/images/treatment_form.png)
 
 ### Ajustes (Endpoints)
 - Lista (Tree) de `hospital.settings`.
@@ -125,8 +116,7 @@ Documentar el comportamiento funcional del módulo Hospital para que un analista
 1. Ir a **Hospital → Tratamientos**.
 2. Crear nuevo tratamiento con `name` y descripción.
 3. Guardar.  
-**Imagen — Crear tratamiento**  
-![Crear tratamiento ejemplo](docs/images/create_treatment.png)
+
 
 **Reglas:**
 - Validar duplicados si es necesario (opcional).
@@ -142,8 +132,7 @@ Documentar el comportamiento funcional del módulo Hospital para que un analista
 5. Opcional: dejar `patient_code` vacío para que el sistema lo genere por secuencia.
 6. Guardar.
 
-**Imagen — Crear paciente**  
-![Crear paciente ejemplo](docs/images/create_patient.png)
+
 
 **Automatismos al guardar:**
 - Si `patient_code` no existe, se genera con `ir.sequence` (`hospital.patient.seq`).
@@ -164,8 +153,6 @@ Documentar el comportamiento funcional del módulo Hospital para que un analista
 - `Borrador` y `Baja` cambian solo el estado.
 - Estos cambios quedan registrados si `tracking=True` (si se necesitó trazabilidad en chatter).
 
-**Imagen — Statusbar y botones**  
-![Statusbar paciente](docs/images/statusbar_patient.png)
 
 ---
 
@@ -177,6 +164,8 @@ Documentar el comportamiento funcional del módulo Hospital para que un analista
 
 **Imagen — Ejemplo de PDF generado**  
 ![Preview PDF reporte pacientes](docs/images/report_pdf_preview.png)
+**Imagen — Reporte**  
+![Formulario tratamiento](docs/images/treatment_form.png)
 
 ---
 
