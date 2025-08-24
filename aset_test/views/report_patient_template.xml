@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="report_patient_document">
+      <t t-call="web.external_layout">
+        <main class="page">
+          <h2>Listado de pacientes</h2>
+          <table class="table table-sm"
+                 style="width:100%; border-collapse: collapse; font-size:12px;">
+            <thead>
+              <tr>
+                <th>Secuencia</th>
+                <th>Nombre</th>
+                <th>RNC</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="docs" t-as="o">
+                <tr>
+                  <td><span t-esc="o.patient_code or ''"/></td>
+                  <td><span t-esc="o.name or ''"/></td>
+                  <td><span t-esc="o.document_number or ''"/></td>
+                  <td>
+                    <span t-esc="dict(o._fields['state'].selection).get(o.state) or o.state or ''"/>
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+          <div style="margin-top:12px; font-size:11px;">
+            <strong>Total pacientes:</strong> <t t-esc="len(docs)"/>
+          </div>
+        </main>
+      </t>
+    </template>
+
+    <record id="action_report_patient_pdf" model="ir.actions.report">
+      <field name="name">Pacientes (PDF)</field>
+      <field name="model">hospital.patient</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">aset_test.report_patient_document</field>
+      <field name="report_file">aset_test.report_patient_document</field>
+      <field name="binding_model_id" ref="model_hospital_patient" />
+      <field name="binding_type">report</field>
+    </record>
+
+    <record id="server_action_print_patients" model="ir.actions.server">
+      <field name="name">Imprimir Pacientes seleccionados</field>
+      <field name="model_id" ref="model_hospital_patient" />
+      <field name="binding_model_id" ref="model_hospital_patient" />
+      <field name="binding_type">action</field>
+      <field name="state">code</field>
+      <field name="code"><![CDATA[
+active_ids = env.context.get('active_ids') or []
+records = env['hospital.patient'].browse(active_ids)
+action = env.ref('aset_test.action_report_patient_pdf').report_action(records)
+]]></field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- Tree view -->
+    <record id="view_hospital_settings_tree" model="ir.ui.view">
+      <field name="name">hospital.settings.tree</field>
+      <field name="model">hospital.settings</field>
+      <field name="arch" type="xml">
+        <tree string="Hospital Settings">
+          <field name="hospital_endpoint"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_hospital_settings_form" model="ir.ui.view">
+      <field name="name">hospital.settings.form</field>
+      <field name="model">hospital.settings</field>
+      <field name="arch" type="xml">
+        <form string="Hospital - Configuración">
+          <sheet>
+            <group>
+              <field name="hospital_endpoint" placeholder="https://mi-servidor/pacientes/consulta/"/>
+            </group>
+            <footer>
+              <button string="Guardar" type="object" name="write" class="btn-primary" />
+              <button string="Cerrar" class="btn-secondary" special="cancel"/>
+            </footer>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action: list + form (sin res_id), para ver todos los endpoints -->
+    <record id="action_hospital_settings_list" model="ir.actions.act_window">
+      <field name="name">Hospital Webservice</field>
+      <field name="res_model">hospital.settings</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="view_hospital_settings_tree"/>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Configure your endpoint.
+        </p>
+      </field>
+      <field name="target">current</field>
+    </record>
+
+
+    <!-- Menu dentro de Ajustes (administradores) -->
+    <menuitem id="menu_hospital_settings"
+              name="Hospital"
+              parent="base.menu_administration"   
+              action="action_hospital_settings_list"
+              sequence="160"
+              groups="base.group_system"/>
+  </data>
+</odoo>

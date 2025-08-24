@@ -1,0 +1,21 @@
+{
+    "name": "Hospital - Pacientes",
+    "version": "17.0.1.0.0",
+    "summary": "Gestión básica de pacientes, API y reportes (skeleton para pruebas)",
+    "category": "Hospital",
+    "author": "Carlos Estrada",
+    "license": "OPL-1",
+    "depends": ["base", "mail", "web"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/hospital_patient_views.xml",
+        "data/sequence_data.xml",
+        "views/report_patient_template.xml",
+        "views/hospital_treatment_views.xml",
+        'views/res_config_settings_views.xml',        
+    ],
+    "demo": [],
+    "application": False,
+    "installable": True,
+    "auto_install": False,
+}

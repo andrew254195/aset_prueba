@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree string="Pacientes">
+                <field name="patient_code" />
+                <field name="name" />
+                <field name="document_number" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form string="Paciente">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,alta,baja" />
+                    <field name="patient_code" readonly="1" />
+                    <button name="action_set_draft"
+                        type="object"
+                        string="Borrador"
+                        class="oe_stat_button o_statusbar_button"
+                        modifiers="{'invisible': [('state','=','draft')]}" />
+
+                    <button name="action_set_alta"
+                        type="object"
+                        string="Alta"
+                        class="oe_stat_button o_statusbar_button"
+                        modifiers="{'invisible': [('state','=','alta')]}" />
+
+                    <button name="action_set_baja"
+                        type="object"
+                        string="Baja"
+                        class="oe_stat_button o_statusbar_button"
+                        modifiers="{'invisible': [('state','=','baja')]}" />
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="patient_code" readonly="1" />
+                        <field name="name" />
+                        <field name="document_number" />
+                    </group>
+
+                    <notebook>
+                        <page string="Tratamientos">
+                            <field name="treatment_ids" widget="many2many_tags"
+                                options="{'no_create': True}" />
+                        </page>
+
+                        <page string="Fechas">
+                            <group>
+                                <field name="fecha_hora_alta" readonly="1" />
+                                <field name="fecha_hora_actualizacion" readonly="1" />
+                            </group>
+                        </page>
+
+                        <page string="Historial">
+                            <field name="message_follower_ids" widget="followers" />
+                            <field name="message_ids" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hospital_patients" model="ir.actions.act_window">
+        <field name="name">Pacientes</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_hospital_root" name="Hospital" sequence="30" />
+    <menuitem id="menu_hospital_patients" name="Pacientes" parent="menu_hospital_root" sequence="10"
+        action="action_hospital_patients" />
+
+
+</odoo>
